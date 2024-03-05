@@ -44,6 +44,10 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:mysql")
+
+	// Modulith と actuator を同時に入れるとこれがないと動かない 2024/3/6
+	// https://stackoverflow.com/questions/78013972/classnotfoundexception-io-micrometer-tracing-tracer-for-new-spring-boot-project
+	implementation("io.micrometer:micrometer-tracing-bridge-otel")
 }
 
 dependencyManagement {
