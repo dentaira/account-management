@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.3"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.flywaydb.flyway") version "9.22.3"
 }
 
 group = "dentaira"
@@ -58,4 +59,20 @@ dependencyManagement {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+flyway {
+	driver = "com.mysql.cj.jdbc.Driver"
+	url = "jdbc:mysql://localhost:3306/mydatabase"
+	user = "myuser"
+	password = "secret"
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.flywaydb:flyway-mysql:9.22.3")
+	}
 }
