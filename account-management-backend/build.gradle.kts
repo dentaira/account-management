@@ -33,6 +33,9 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
+
+    implementation("com.fasterxml.uuid:java-uuid-generator:5.0.0")
+
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("com.mysql:mysql-connector-j")
