@@ -1,9 +1,12 @@
+import org.jooq.meta.jaxb.ForcedType
+
 plugins {
     java
     id("org.springframework.boot") version "3.2.3"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.flywaydb.flyway") version "9.22.3"
-    id("org.jooq.jooq-codegen-gradle") version "3.19.6"
+    id("nu.studer.jooq") version "9.0"
+//    id("org.jooq.jooq-codegen-gradle") version "???" // Spring Bootのバージョンを3.3.0に上げたらこちらに切り替える
 }
 
 group = "dentaira"
@@ -53,10 +56,9 @@ dependencies {
     // https://stackoverflow.com/questions/78013972/classnotfoundexception-io-micrometer-tracing-tracer-for-new-spring-boot-project
     implementation("io.micrometer:micrometer-tracing-bridge-otel")
 
-    jooqCodegen("org.postgresql:postgresql")
-
 //    implementation("org.jooq:jooq-postgres-extensions")
 
+    jooqGenerator("org.postgresql:postgresql")
 }
 
 dependencyManagement {
@@ -91,31 +93,35 @@ sourceSets {
 }
 
 jooq {
-    // This is the configuration for the code generation task
-    // See https://www.jooq.org/doc/3.15/manual/code-generation/codegen-gradle/
-    // for more details
-    configuration {
-        logging = org.jooq.meta.jaxb.Logging.DEBUG // TODO
-        jdbc {
-            driver = "org.postgresql.Driver"
-            url = "jdbc:postgresql://localhost:5432/mydatabase"
-            user = "myuser"
-            password = "secret"
-        }
-        generator {
-            database {
-                includes = "public.*"
-                excludes = "flyway_schema_history"
-                forcedTypes {
-                    forcedType {
-                        name = "INSTANT"
-                        includeTypes = "timestamptz"
-                    }
+    version.set(dependencyManagement.importedProperties["jooq.version"])
+    configurations {
+        create("main") {
+            jooqConfiguration.apply {
+                jdbc.apply {
+                    driver = "org.postgresql.Driver"
+                    url = "jdbc:postgresql://localhost:5432/mydatabase"
+                    user = "myuser"
+                    password = "secret"
                 }
-            }
-            target {
-                packageName = "dentaira.accountmanagement.generated"
-                directory = "src/main/generated"
+                generator.apply {
+                    name = "org.jooq.codegen.DefaultGenerator"
+                    database.apply {
+                        name = "org.jooq.meta.postgres.PostgresDatabase"
+                        inputSchema = "public"
+                        excludes = "flyway_schema_history"
+                        forcedTypes.addAll(listOf(
+                                ForcedType().apply {
+                                    name = "INSTANT"
+                                    includeTypes = "timestamptz"
+                                },
+                        ))
+                    }
+                    target.apply {
+                        packageName = "dentaira.accountmanagement.generated"
+                        directory = "src/main/generated"
+                    }
+                    strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                }
             }
         }
     }
