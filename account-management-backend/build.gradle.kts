@@ -31,14 +31,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-mysql")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
 
     implementation("com.fasterxml.uuid:java-uuid-generator:5.0.0")
 
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.springframework.modulith:spring-modulith-actuator")
     runtimeOnly("org.springframework.modulith:spring-modulith-observability")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -48,13 +47,16 @@ dependencies {
     testImplementation("org.springframework.modulith:spring-modulith-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:mysql")
+    testImplementation("org.testcontainers:postgresql")
 
     // Modulith と actuator を同時に入れるとこれがないと動かない 2024/3/6
     // https://stackoverflow.com/questions/78013972/classnotfoundexception-io-micrometer-tracing-tracer-for-new-spring-boot-project
     implementation("io.micrometer:micrometer-tracing-bridge-otel")
 
-    jooqCodegen("com.mysql:mysql-connector-j")
+    jooqCodegen("org.postgresql:postgresql")
+
+//    implementation("org.jooq:jooq-postgres-extensions")
+
 }
 
 dependencyManagement {
@@ -68,8 +70,8 @@ tasks.withType<Test> {
 }
 
 flyway {
-    driver = "com.mysql.cj.jdbc.Driver"
-    url = "jdbc:mysql://localhost:3306/mydatabase"
+    driver = "org.postgresql.Driver"
+    url = "jdbc:postgresql://localhost:5432/mydatabase"
     user = "myuser"
     password = "secret"
 }
@@ -77,9 +79,6 @@ flyway {
 buildscript {
     repositories {
         mavenCentral()
-    }
-    dependencies {
-        classpath("org.flywaydb:flyway-mysql:9.22.3")
     }
 }
 
@@ -96,21 +95,21 @@ jooq {
     // See https://www.jooq.org/doc/3.15/manual/code-generation/codegen-gradle/
     // for more details
     configuration {
+        logging = org.jooq.meta.jaxb.Logging.DEBUG // TODO
         jdbc {
-            driver = "com.mysql.cj.jdbc.Driver"
-            url = "jdbc:mysql://localhost:3306/mydatabase"
+            driver = "org.postgresql.Driver"
+            url = "jdbc:postgresql://localhost:5432/mydatabase"
             user = "myuser"
             password = "secret"
         }
         generator {
             database {
-                name = "org.jooq.meta.mysql.MySQLDatabase"
-                includes = "mydatabase.*"
+                includes = "public.*"
                 excludes = "flyway_schema_history"
                 forcedTypes {
                     forcedType {
-                        name = "DATETIME"
-                        types = "java.time.Instant"
+                        name = "INSTANT"
+                        includeTypes = "timestamptz"
                     }
                 }
             }
