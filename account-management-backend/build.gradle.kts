@@ -83,6 +83,14 @@ buildscript {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir("src/main/generated")
+        }
+    }
+}
+
 jooq {
     // This is the configuration for the code generation task
     // See https://www.jooq.org/doc/3.15/manual/code-generation/codegen-gradle/
@@ -99,6 +107,12 @@ jooq {
                 name = "org.jooq.meta.mysql.MySQLDatabase"
                 includes = "mydatabase.*"
                 excludes = "flyway_schema_history"
+                forcedTypes {
+                    forcedType {
+                        name = "DATETIME"
+                        types = "java.time.Instant"
+                    }
+                }
             }
             target {
                 packageName = "dentaira.accountmanagement.generated"
