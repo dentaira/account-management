@@ -8,6 +8,7 @@ import dentaira.accountmanagement.user.User;
 import dentaira.accountmanagement.user.UserRepository;
 import dentaira.accountmanagement.user.UserRole;
 import dentaira.accountmanagement.user.UserStatus;
+import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
@@ -18,13 +19,10 @@ import static dentaira.accountmanagement.generated.Tables.USERS;
 
 
 @Repository
+@AllArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
     private final DSLContext context;
-
-    public UserRepositoryImpl(DSLContext context) {
-        this.context = context;
-    }
 
     @Override
     public Optional<User> findById(EntityId<User> userId) {
