@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### JOOQ generated code ###
-src/main/generated/
+src/main/generated/jooq
