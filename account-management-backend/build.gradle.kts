@@ -7,6 +7,7 @@ plugins {
     id("org.flywaydb.flyway") version "9.22.3"
     id("nu.studer.jooq") version "9.0"
 //    id("org.jooq.jooq-codegen-gradle") version "???" // Spring Bootのバージョンを3.3.0に上げたらこちらに切り替える
+    id("org.openapi.generator") version "7.4.0"
 }
 
 group = "dentaira"
