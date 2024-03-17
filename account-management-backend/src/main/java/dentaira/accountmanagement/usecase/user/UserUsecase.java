@@ -1,7 +1,7 @@
 package dentaira.accountmanagement.usecase.user;
 
-import dentaira.accountmanagement.common.entity.EntityNotFoundException;
 import dentaira.accountmanagement.common.email.EmailAddress;
+import dentaira.accountmanagement.common.entity.EntityNotFoundException;
 import dentaira.accountmanagement.user.UserRepository;
 import dentaira.accountmanagement.user.UserService;
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ public class UserUsecase {
     public UserDTO edit(UserEditCommand command) {
         var targetUser = userRepository.findById(command.userId()).orElseThrow(EntityNotFoundException::new);
 
-        var editedUser = userService.edit(targetUser, command.userEdit());
+        var editedUser = userService.edit(targetUser, command.newName(), command.newRole(), command.newStatus());
 
         var savedUser = userRepository.update(editedUser);
 

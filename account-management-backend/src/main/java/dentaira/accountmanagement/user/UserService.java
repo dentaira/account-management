@@ -20,18 +20,15 @@ public class UserService {
         return new User(userId, email, name, role, UserStatus.Active, 1, dateTimeFactory.now(), dateTimeFactory.now());
     }
 
-    public User edit(User user, UserEdit edit) {
-        if (user.status().canTransitTo(edit.status())) {
-            throw new IllegalArgumentException("Invalid status transition. " + user.status() + " -> " + edit.status());
+    public User edit(User user, String newName, UserRole newRole, UserStatus newStatus) {
+        if (user.status().canTransitTo(newStatus)) {
+            throw new IllegalArgumentException("Invalid status transition. " + user.status() + " -> " + newStatus);
         }
         return user
-                .withName(edit.name())
-                .withRole(edit.role())
-                .withStatus(edit.status())
+                .withName(newName)
+                .withRole(newRole)
+                .withStatus(newStatus)
                 .withUpdatedAt(dateTimeFactory.now());
-    }
-
-    public record UserEdit(String name, UserRole role, UserStatus status) {
     }
 
     public User changeEmail(User user, EmailAddress email) {
