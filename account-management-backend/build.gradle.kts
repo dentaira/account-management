@@ -87,7 +87,7 @@ buildscript {
 sourceSets {
     main {
         java {
-            srcDir("src/main/generated")
+            srcDir("src/main/generated") // fixme Intellij IDEA で src/main/generated が認識されない
         }
     }
 }
