@@ -1,12 +1,13 @@
 package dentaira.accountmanagement.infra.db;
 
-import com.fasterxml.uuid.Generators;
-import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.email.EmailAddress;
 import dentaira.accountmanagement.common.entity.EntityId;
 import dentaira.accountmanagement.common.entity.EntityUpdateConflictException;
 import dentaira.accountmanagement.generated.tables.records.UsersRecord;
-import dentaira.accountmanagement.user.*;
+import dentaira.accountmanagement.user.User;
+import dentaira.accountmanagement.user.UserRepository;
+import dentaira.accountmanagement.user.UserRole;
+import dentaira.accountmanagement.user.UserStatus;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +21,6 @@ import static dentaira.accountmanagement.generated.Tables.USERS;
 public class UserRepositoryImpl implements UserRepository {
 
     private final DSLContext context;
-
-    private static final TimeBasedEpochGenerator generator = Generators.timeBasedEpochGenerator();
 
     public UserRepositoryImpl(DSLContext context) {
         this.context = context;
