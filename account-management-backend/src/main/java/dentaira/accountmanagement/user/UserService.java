@@ -21,18 +21,19 @@ public class UserService {
     }
 
     public User edit(User user, String newName, UserRole newRole, UserStatus newStatus) {
-        if (user.status().canTransitTo(newStatus)) {
+        if (!user.status().canTransitTo(newStatus)) {
             throw new IllegalArgumentException("Invalid status transition. " + user.status() + " -> " + newStatus);
         }
-        return user
+        return user.toBuilder()
                 .withName(newName)
                 .withRole(newRole)
                 .withStatus(newStatus)
-                .withUpdatedAt(dateTimeFactory.now());
+                .withUpdatedAt(dateTimeFactory.now())
+                .build();
     }
 
     public User changeEmail(User user, EmailAddress email) {
-        return user.withEmail(email).withUpdatedAt(dateTimeFactory.now());
+        return user.toBuilder().withEmail(email).withUpdatedAt(dateTimeFactory.now()).build();
     }
 }
 
