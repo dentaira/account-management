@@ -118,7 +118,7 @@ jooq {
                         ))
                     }
                     target.apply {
-                        packageName = "dentaira.accountmanagement.generated"
+                        packageName = "dentaira.accountmanagement.infra.db.jooq"
                         directory = "src/main/generated/jooq"
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"

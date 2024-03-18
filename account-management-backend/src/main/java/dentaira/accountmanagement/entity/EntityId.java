@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.common.entity;
+package dentaira.accountmanagement.entity;
 
 import java.util.UUID;
 

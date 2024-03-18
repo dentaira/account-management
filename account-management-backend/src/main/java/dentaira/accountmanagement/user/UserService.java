@@ -1,9 +1,9 @@
 package dentaira.accountmanagement.user;
 
-import dentaira.accountmanagement.common.datetime.DateTimeFactory;
-import dentaira.accountmanagement.common.email.EmailAddress;
-import dentaira.accountmanagement.common.entity.EntityId;
-import dentaira.accountmanagement.common.entity.EntityIdGenerator;
+import dentaira.accountmanagement.common.DateTimeFactory;
+import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.entity.EntityId;
+import dentaira.accountmanagement.entity.EntityIdGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

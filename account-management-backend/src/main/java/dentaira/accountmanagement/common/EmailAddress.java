@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.common.email;
+package dentaira.accountmanagement.common;
 
 public record EmailAddress(String value) {
 

@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.common.entity;
+package dentaira.accountmanagement.entity;
 
 public class EntityUpdateConflictException extends RuntimeException {
 }

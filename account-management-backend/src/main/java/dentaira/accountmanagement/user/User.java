@@ -1,7 +1,7 @@
 package dentaira.accountmanagement.user;
 
-import dentaira.accountmanagement.common.email.EmailAddress;
-import dentaira.accountmanagement.common.entity.EntityId;
+import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.entity.EntityId;
 import lombok.AccessLevel;
 import lombok.Builder;
 

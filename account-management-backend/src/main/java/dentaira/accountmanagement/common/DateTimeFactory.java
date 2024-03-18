@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.common.datetime;
+package dentaira.accountmanagement.common;
 
 import org.springframework.stereotype.Component;
 

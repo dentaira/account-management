@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.common.entity;
+package dentaira.accountmanagement.entity;
 
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;

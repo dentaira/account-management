@@ -1,7 +1,7 @@
 package dentaira.accountmanagement.usecase.user;
 
-import dentaira.accountmanagement.common.email.EmailAddress;
-import dentaira.accountmanagement.common.entity.EntityNotFoundException;
+import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.entity.EntityNotFoundException;
 import dentaira.accountmanagement.user.UserRepository;
 import dentaira.accountmanagement.user.UserService;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,13 @@
 package dentaira.accountmanagement.infra.db;
 
-import dentaira.accountmanagement.common.email.EmailAddress;
-import dentaira.accountmanagement.common.entity.EntityId;
-import dentaira.accountmanagement.common.entity.EntityUpdateConflictException;
-import dentaira.accountmanagement.generated.tables.records.UsersRecord;
+import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.entity.EntityId;
+import dentaira.accountmanagement.entity.EntityUpdateConflictException;
 import dentaira.accountmanagement.user.User;
 import dentaira.accountmanagement.user.UserRepository;
 import dentaira.accountmanagement.user.UserRole;
 import dentaira.accountmanagement.user.UserStatus;
+import dentaira.accountmanagement.infra.db.jooq.tables.records.UsersRecord;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static dentaira.accountmanagement.generated.Tables.USERS;
+import static dentaira.accountmanagement.infra.db.jooq.Tables.USERS;
 
 
 @Repository
