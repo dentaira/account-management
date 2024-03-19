@@ -3,6 +3,7 @@ package dentaira.accountmanagement.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -14,6 +15,8 @@ public class WebSecurityConfig {
 //        http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
 //                .httpBasic(withDefaults())
         ;
-        return http.build();
+        return http.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
+                .build();
     }
 }
