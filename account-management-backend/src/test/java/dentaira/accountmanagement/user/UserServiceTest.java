@@ -34,7 +34,7 @@ class UserServiceTest {
                 new EntityId<>(UUID.randomUUID()),
                 EmailAddress.of("local", "example.com"),
                 "oldName",
-                UserRole.USER,
+                UserRole.User,
                 UserStatus.Inactive,
                 0,
                 Instant.EPOCH,
@@ -44,14 +44,14 @@ class UserServiceTest {
         when(dateTimeFactory.now()).thenReturn(Instant.ofEpochSecond(1234567899));
 
         // when
-        var actual = sut.edit(source, "newName", UserRole.ADMIN, UserStatus.Active);
+        var actual = sut.edit(source, "newName", UserRole.Admin, UserStatus.Active);
 
         // then
         assertThat(actual).isEqualTo(new User(
                 source.userId(),
                 source.email(),
                 "newName",
-                UserRole.ADMIN,
+                UserRole.Admin,
                 UserStatus.Active,
                 source.version(),
                 source.createdAt(),
