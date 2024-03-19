@@ -8,6 +8,7 @@ plugins {
     id("nu.studer.jooq") version "9.0"
 //    id("org.jooq.jooq-codegen-gradle") version "???" // Spring Bootのバージョンを3.3.0に上げたらこちらに切り替える
     id("org.openapi.generator") version "7.4.0"
+    id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 
 group = "dentaira"
@@ -60,6 +61,8 @@ dependencies {
 //    implementation("org.jooq:jooq-postgres-extensions")
 
     jooqGenerator("org.postgresql:postgresql")
+
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
 }
 
 dependencyManagement {
@@ -125,5 +128,22 @@ jooq {
                 }
             }
         }
+    }
+}
+
+openApi {
+    apiDocsUrl.set("http://localhost:8080/api-docs.yaml")
+    outputDir.set(file("$buildDir/docs"))
+    outputFileName.set("swagger.yaml")
+    waitTimeInSeconds.set(10)
+    customBootRun {
+        args.set(listOf("--spring.profiles.active=special"))
+    }
+}
+
+// openapi-gradle-pluginを実行するとエラーになる問題の回避
+tasks {
+    forkedSpringBootRun {
+        doNotTrackState("See https://github.com/springdoc/springdoc-openapi-gradle-plugin/issues/102")
     }
 }
