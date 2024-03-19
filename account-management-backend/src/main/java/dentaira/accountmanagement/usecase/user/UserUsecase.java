@@ -47,4 +47,14 @@ public class UserUsecase {
 
         return UserDTO.from(savedUser);
     }
+
+    public UserDTO changeEmail(EntityId<User> userId, EmailAddress email) {
+        var targetUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+
+        var changedUser = userService.changeEmail(targetUser, email);
+
+        var savedUser = userRepository.update(changedUser);
+
+        return UserDTO.from(savedUser);
+    }
 }
