@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final EntityIdGenerator entityIdGenerator;
-
     private final DateTimeFactory dateTimeFactory;
 
     public User create(EmailAddress email, String name, UserRole role) {
