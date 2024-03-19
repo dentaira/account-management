@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class UserUsecase {
 
@@ -37,7 +38,6 @@ public class UserUsecase {
     /**
      * fixme 実際の値が変更されていなくても更新日時とバージョンが更新される
      */
-    @Transactional
     public UserDTO edit(EntityId<User> userId, UserEditCommand command) {
         var targetUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
