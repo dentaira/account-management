@@ -1,6 +1,7 @@
-package dentaira.accountmanagement.user;
+package dentaira.accountmanagement.user.domain;
 
 import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.user.UserId;
 
 import java.util.Optional;
 

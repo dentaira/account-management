@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.infra.db;
+package dentaira.accountmanagement.infra.db.user;
 
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
@@ -6,6 +6,8 @@ import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.exception.EntityUpdateConflictException;
 import dentaira.accountmanagement.infra.db.jooq.tables.records.UsersRecord;
 import dentaira.accountmanagement.user.*;
+import dentaira.accountmanagement.user.domain.User;
+import dentaira.accountmanagement.user.domain.UserRepository;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;

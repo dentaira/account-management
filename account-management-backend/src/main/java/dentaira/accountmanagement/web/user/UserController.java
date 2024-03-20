@@ -1,10 +1,10 @@
 package dentaira.accountmanagement.web.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.usecase.user.UserCreateCommand;
-import dentaira.accountmanagement.usecase.user.UserDTO;
-import dentaira.accountmanagement.usecase.user.UserEditCommand;
-import dentaira.accountmanagement.usecase.user.UserUsecase;
+import dentaira.accountmanagement.user.UserCreateCommand;
+import dentaira.accountmanagement.user.UserDTO;
+import dentaira.accountmanagement.user.UserEditCommand;
+import dentaira.accountmanagement.user.UserUsecase;
 import dentaira.accountmanagement.user.UserId;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

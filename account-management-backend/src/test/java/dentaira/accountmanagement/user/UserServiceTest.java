@@ -2,6 +2,8 @@ package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.user.domain.User;
+import dentaira.accountmanagement.user.domain.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

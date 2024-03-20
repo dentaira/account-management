@@ -1,7 +1,10 @@
-package dentaira.accountmanagement.user;
+package dentaira.accountmanagement.user.domain;
 
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.user.UserId;
+import dentaira.accountmanagement.user.UserRole;
+import dentaira.accountmanagement.user.UserStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

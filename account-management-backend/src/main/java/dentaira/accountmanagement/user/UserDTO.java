@@ -1,10 +1,7 @@
-package dentaira.accountmanagement.usecase.user;
+package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.user.User;
-import dentaira.accountmanagement.user.UserId;
-import dentaira.accountmanagement.user.UserRole;
-import dentaira.accountmanagement.user.UserStatus;
+import dentaira.accountmanagement.user.domain.User;
 
 import java.time.Instant;
 

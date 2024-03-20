@@ -1,10 +1,9 @@
-package dentaira.accountmanagement.usecase.user;
+package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.exception.EntityNotFoundException;
-import dentaira.accountmanagement.user.UserId;
-import dentaira.accountmanagement.user.UserRepository;
-import dentaira.accountmanagement.user.UserService;
+import dentaira.accountmanagement.user.domain.UserRepository;
+import dentaira.accountmanagement.user.domain.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
