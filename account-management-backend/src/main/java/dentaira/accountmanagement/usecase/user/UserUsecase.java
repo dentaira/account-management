@@ -41,7 +41,7 @@ public class UserUsecase {
     public UserDTO edit(EntityId<User> userId, UserEditCommand command) {
         var targetUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
-        var editedUser = userService.edit(targetUser, command.name(), command.role(), command.status());
+        var editedUser = userService.edit(targetUser, command.name(), command.role(), command.activate());
 
         var savedUser = userRepository.update(editedUser);
 

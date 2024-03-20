@@ -19,13 +19,14 @@ public class UserService {
         return new User(userId, email, name, role, UserStatus.Active, 1, dateTimeFactory.now(), dateTimeFactory.now());
     }
 
-    public User edit(User user, String newName, UserRole newRole, UserStatus newStatus) {
+    public User edit(User user, String name, UserRole role, boolean activate) {
+        var newStatus = activate ? UserStatus.Active : UserStatus.Inactive;
         if (!user.status().canTransitTo(newStatus)) {
             throw new IllegalArgumentException("Invalid status transition. " + user.status() + " -> " + newStatus);
         }
         return user.toBuilder()
-                .withName(newName)
-                .withRole(newRole)
+                .withName(name)
+                .withRole(role)
                 .withStatus(newStatus)
                 .withUpdatedAt(dateTimeFactory.now())
                 .build();

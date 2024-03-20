@@ -44,7 +44,7 @@ class UserServiceTest {
         when(dateTimeFactory.now()).thenReturn(Instant.ofEpochSecond(1234567899));
 
         // when
-        var actual = sut.edit(source, "name", UserRole.Admin, UserStatus.Active);
+        var actual = sut.edit(source, "name", UserRole.Admin, true);
 
         // then
         assertThat(actual).isEqualTo(new User(
