@@ -2,8 +2,6 @@ package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.entity.EntityId;
-import dentaira.accountmanagement.entity.EntityIdGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +9,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserService {
 
-    private final EntityIdGenerator entityIdGenerator;
     private final DateTimeFactory dateTimeFactory;
 
-    public User create(EmailAddress email, String name, UserRole role) {
-        EntityId<User> userId = entityIdGenerator.generate();
-        return new User(userId, email, name, role, UserStatus.Active, 1, dateTimeFactory.now(), dateTimeFactory.now());
+    public User create(UserId userId, EmailAddress email, String name, UserRole role) {
+        var now = dateTimeFactory.now();
+        return new User(userId, email, name, role, UserStatus.Active, 1, now, now);
     }
 
     public User edit(User user, String name, UserRole role, boolean activate) {

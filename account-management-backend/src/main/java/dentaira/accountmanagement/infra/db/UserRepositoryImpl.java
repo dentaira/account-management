@@ -1,13 +1,11 @@
 package dentaira.accountmanagement.infra.db;
 
+import com.fasterxml.uuid.Generators;
+import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.entity.EntityId;
-import dentaira.accountmanagement.entity.EntityUpdateConflictException;
-import dentaira.accountmanagement.user.User;
-import dentaira.accountmanagement.user.UserRepository;
-import dentaira.accountmanagement.user.UserRole;
-import dentaira.accountmanagement.user.UserStatus;
+import dentaira.accountmanagement.exception.EntityUpdateConflictException;
 import dentaira.accountmanagement.infra.db.jooq.tables.records.UsersRecord;
+import dentaira.accountmanagement.user.*;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
@@ -22,10 +20,16 @@ import static dentaira.accountmanagement.infra.db.jooq.Tables.USERS;
 @AllArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
+    private static final TimeBasedEpochGenerator generator = Generators.timeBasedEpochGenerator();
     private final DSLContext context;
 
     @Override
-    public Optional<User> findById(EntityId<User> userId) {
+    public UserId generateId() {
+        return new UserId(generator.generate());
+    }
+
+    @Override
+    public Optional<User> findById(UserId userId) {
         var record = context.selectFrom(USERS).where(USERS.ID.eq(userId.value())).fetchOptional();
         return record.map(toUser);
     }
@@ -66,7 +70,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private final Function<UsersRecord, User> toUser = r -> new User(
-            new EntityId<>(r.getId()),
+            new UserId(r.getId()),
             new EmailAddress(r.getEmail()),
             r.getUserName(),
             UserRole.valueOf(r.getRole()),

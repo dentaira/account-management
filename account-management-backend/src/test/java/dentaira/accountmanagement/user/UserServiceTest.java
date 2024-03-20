@@ -2,8 +2,6 @@ package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.entity.EntityId;
-import dentaira.accountmanagement.entity.EntityIdGenerator;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,9 +17,6 @@ import static org.mockito.Mockito.when;
 class UserServiceTest {
 
     @Mock
-    private EntityIdGenerator entityIdGenerator;
-
-    @Mock
     private DateTimeFactory dateTimeFactory;
 
     @InjectMocks
@@ -31,7 +26,7 @@ class UserServiceTest {
     public void testEdit() {
         // given
         var source = new User(
-                new EntityId<>(UUID.randomUUID()),
+                UserId.of(UUID.randomUUID()),
                 EmailAddress.of("local", "example.com"),
                 "oldName",
                 UserRole.User,
@@ -44,13 +39,13 @@ class UserServiceTest {
         when(dateTimeFactory.now()).thenReturn(Instant.ofEpochSecond(1234567899));
 
         // when
-        var actual = sut.edit(source, "name", UserRole.Admin, true);
+        var actual = sut.edit(source, "newName", UserRole.Admin, true);
 
         // then
         assertThat(actual).isEqualTo(new User(
                 source.userId(),
                 source.email(),
-                "name",
+                "newName",
                 UserRole.Admin,
                 UserStatus.Active,
                 source.version(),

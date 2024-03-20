@@ -1,9 +1,8 @@
 package dentaira.accountmanagement.usecase.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.entity.EntityId;
-import dentaira.accountmanagement.entity.EntityNotFoundException;
-import dentaira.accountmanagement.user.User;
+import dentaira.accountmanagement.exception.EntityNotFoundException;
+import dentaira.accountmanagement.user.UserId;
 import dentaira.accountmanagement.user.UserRepository;
 import dentaira.accountmanagement.user.UserService;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,8 @@ public class UserUsecase {
             throw new IllegalArgumentException("User already exists. " + email.value());
         });
 
-        var createdUser = userService.create(email, command.name(), command.role());
+        var userId = userRepository.generateId();
+        var createdUser = userService.create(userId, email, command.name(), command.role());
 
         userRepository.save(createdUser);
 
@@ -38,7 +38,7 @@ public class UserUsecase {
     /**
      * fixme 実際の値が変更されていなくても更新日時とバージョンが更新される
      */
-    public UserDTO edit(EntityId<User> userId, UserEditCommand command) {
+    public UserDTO edit(UserId userId, UserEditCommand command) {
         var targetUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
         var editedUser = userService.edit(targetUser, command.name(), command.role(), command.activate());
@@ -48,7 +48,7 @@ public class UserUsecase {
         return UserDTO.from(savedUser);
     }
 
-    public UserDTO changeEmail(EntityId<User> userId, EmailAddress email) {
+    public UserDTO changeEmail(UserId userId, EmailAddress email) {
         var targetUser = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
         var changedUser = userService.changeEmail(targetUser, email);

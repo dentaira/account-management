@@ -1,14 +1,14 @@
 package dentaira.accountmanagement.usecase.user;
 
-import dentaira.accountmanagement.entity.EntityId;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.user.User;
+import dentaira.accountmanagement.user.UserId;
 import dentaira.accountmanagement.user.UserRole;
 import dentaira.accountmanagement.user.UserStatus;
 
 import java.time.Instant;
 
-public record UserDTO(EntityId<User> userId,
+public record UserDTO(UserId userId,
                       EmailAddress email,
                       String name,
                       UserRole role,
