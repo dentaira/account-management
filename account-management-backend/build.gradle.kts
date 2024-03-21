@@ -61,6 +61,7 @@ dependencies {
 //    implementation("org.jooq:jooq-postgres-extensions")
 
     jooqGenerator("org.postgresql:postgresql")
+    jooqGenerator(project(":jooq-custom-generator"))
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
 }
@@ -121,10 +122,10 @@ jooq {
                         ))
                     }
                     target.apply {
-                        packageName = "dentaira.accountmanagement.infra.db.jooq"
+                        packageName = "dentaira.accountmanagement.jooq"
                         directory = "src/main/generated/jooq"
                     }
-                    strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                    strategy.name = "dentaira.accountmanagement.build.jooq.codegen.CustomGeneratorStrategy" // カスタマイズ
                 }
             }
         }
