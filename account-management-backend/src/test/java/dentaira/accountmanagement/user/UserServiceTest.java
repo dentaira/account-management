@@ -31,7 +31,7 @@ class UserServiceTest {
                 UserId.of(UUID.randomUUID()),
                 EmailAddress.of("local", "example.com"),
                 "oldName",
-                UserRole.User,
+                UserRole.Normal,
                 UserStatus.Inactive,
                 0,
                 Instant.EPOCH,
