@@ -6,7 +6,7 @@ import org.springframework.modulith.Modulithic;
 
 @SpringBootApplication
 @Modulithic(
-        sharedModules = {"common", "exception"},
+        sharedModules = {"common"},
         additionalPackages = {"dentaira.accountmanagement.jooq"}
 )
 public class AccountManagementBackendApplication {

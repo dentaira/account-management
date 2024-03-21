@@ -3,7 +3,7 @@ package dentaira.accountmanagement.member.infra;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.exception.EntityUpdateConflictException;
+import dentaira.accountmanagement.common.EntityUpdateConflictException;
 import dentaira.accountmanagement.jooq.MembersRecord;
 import dentaira.accountmanagement.member.MemberId;
 import dentaira.accountmanagement.member.MemberStatus;

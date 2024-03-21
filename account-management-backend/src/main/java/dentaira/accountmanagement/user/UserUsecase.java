@@ -1,7 +1,7 @@
 package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
-import dentaira.accountmanagement.exception.EntityNotFoundException;
+import dentaira.accountmanagement.common.EntityNotFoundException;
 import dentaira.accountmanagement.member.MemberCreatedEvent;
 import dentaira.accountmanagement.user.domain.UserRepository;
 import dentaira.accountmanagement.user.domain.UserService;
