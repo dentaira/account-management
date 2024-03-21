@@ -34,7 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findById(UserId userId) {
-        var record = context.selectFrom(USERS).where(USERS.ID.eq(userId.value())).fetchOptional();
+        var record = context.selectFrom(USERS).where(USERS.USER_ID.eq(userId.value())).fetchOptional();
         return record.map(toUser);
     }
 
@@ -47,7 +47,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void save(User user) {
         context.insertInto(USERS)
-                .set(USERS.ID, user.userId().value())
+                .set(USERS.USER_ID, user.userId().value())
                 .set(USERS.EMAIL, user.email().value())
                 .set(USERS.USER_NAME, user.name())
                 .set(USERS.ROLE, user.role().name())
@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
                 .set(USERS.ROLE, user.role().name())
                 .set(USERS.STATUS, user.status().name())
                 .set(USERS.VERSION, user.version() + 1)
-                .where(USERS.ID.eq(user.userId().value()))
+                .where(USERS.USER_ID.eq(user.userId().value()))
                 .and(USERS.VERSION.eq(user.version()))
                 .returning()
                 .fetchOptional()
@@ -74,7 +74,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private final Function<UsersRecord, User> toUser = r -> new User(
-            new UserId(r.getId()),
+            new UserId(r.getUserId()),
             new EmailAddress(r.getEmail()),
             r.getUserName(),
             UserRole.valueOf(r.getRole()),
