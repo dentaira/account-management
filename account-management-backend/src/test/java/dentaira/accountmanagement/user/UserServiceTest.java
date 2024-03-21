@@ -2,6 +2,7 @@ package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
+import dentaira.accountmanagement.member.MemberId;
 import dentaira.accountmanagement.user.domain.User;
 import dentaira.accountmanagement.user.domain.UserService;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ class UserServiceTest {
         // given
         var source = new User(
                 UserId.of(UUID.randomUUID()),
+                MemberId.of(UUID.randomUUID()),
                 EmailAddress.of("local", "example.com"),
                 "oldName",
                 UserRole.Normal,
@@ -46,6 +48,7 @@ class UserServiceTest {
         // then
         assertThat(actual).isEqualTo(new User(
                 source.userId(),
+                source.memberId(),
                 source.email(),
                 "newName",
                 UserRole.Admin,

@@ -1,4 +1,6 @@
 package dentaira.accountmanagement.user;
 
-public record UserCreateCommand(String emailLocal, String emailDomain, String name, UserRole role) {
+import dentaira.accountmanagement.member.MemberId;
+
+public record UserCreateCommand(MemberId memberId, String email, String name, UserRole role) {
 }

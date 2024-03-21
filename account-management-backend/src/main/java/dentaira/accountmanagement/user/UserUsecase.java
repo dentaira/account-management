@@ -20,14 +20,14 @@ public class UserUsecase {
      * fixme create password
      */
     public UserDTO create(UserCreateCommand command) {
-        var email = EmailAddress.of(command.emailLocal(), command.emailDomain());
+        var email = new EmailAddress(command.email());
 
         userRepository.findByEmail(email).ifPresent(user -> {
             throw new IllegalArgumentException("User already exists. " + email.value());
         });
 
         var userId = userRepository.generateId();
-        var createdUser = userService.create(userId, email, command.name(), command.role());
+        var createdUser = userService.create(userId, command.memberId(), email, command.name(), command.role());
 
         userRepository.save(createdUser);
 

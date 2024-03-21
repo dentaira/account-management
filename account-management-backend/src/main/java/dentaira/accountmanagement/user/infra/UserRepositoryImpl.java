@@ -5,6 +5,7 @@ import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.exception.EntityUpdateConflictException;
 import dentaira.accountmanagement.jooq.UsersRecord;
+import dentaira.accountmanagement.member.MemberId;
 import dentaira.accountmanagement.user.UserId;
 import dentaira.accountmanagement.user.UserRole;
 import dentaira.accountmanagement.user.UserStatus;
@@ -48,6 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void save(User user) {
         context.insertInto(USERS)
                 .set(USERS.USER_ID, user.userId().value())
+                .set(USERS.MEMBER_ID, user.memberId().value())
                 .set(USERS.EMAIL, user.email().value())
                 .set(USERS.USER_NAME, user.name())
                 .set(USERS.ROLE, user.role().name())
@@ -75,6 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final Function<UsersRecord, User> toUser = r -> new User(
             new UserId(r.getUserId()),
+            new MemberId(r.getMemberId()),
             new EmailAddress(r.getEmail()),
             r.getUserName(),
             UserRole.valueOf(r.getRole()),
