@@ -2,9 +2,11 @@ package dentaira.accountmanagement.user;
 
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.exception.EntityNotFoundException;
+import dentaira.accountmanagement.member.MemberCreatedEvent;
 import dentaira.accountmanagement.user.domain.UserRepository;
 import dentaira.accountmanagement.user.domain.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,12 @@ public class UserUsecase {
         userRepository.save(createdUser);
 
         return UserDTO.from(createdUser);
+    }
+
+    @EventListener
+    public void onMemberCreated(MemberCreatedEvent event) {
+        var command = new UserCreateCommand(event.memberId(), event.email().value(), event.applicantName(), UserRole.Admin);
+        create(command);
     }
 
     /**
