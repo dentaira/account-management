@@ -10,7 +10,6 @@ import java.util.List;
 
 import static dentaira.accountmanagement.jooq.Members.MEMBERS;
 import static dentaira.accountmanagement.jooq.Tables.USERS;
-import static java.util.stream.Collectors.groupingBy;
 
 @Component
 @AllArgsConstructor
@@ -27,8 +26,7 @@ public class MemberWithUsersQuery {
                 .from(MEMBERS)
                 .join(USERS).on(MEMBERS.MEMBER_ID.eq(USERS.MEMBER_ID));
 
-        return sql.fetchStream()
-                .collect(groupingBy(r -> r.get(MEMBERS.MEMBER_ID)))
+        return sql.fetchGroups(MEMBERS.MEMBER_ID)
                 .entrySet()
                 .stream()
                 .map(entry -> {
