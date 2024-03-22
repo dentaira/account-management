@@ -16,7 +16,7 @@ public record UserDTO(UserId userId,
                       Instant createdAt,
                       Instant updatedAt) {
 
-    public static UserDTO from(User user) {
+    static UserDTO from(User user) {
         return new UserDTO(user.userId(),
                 user.memberId(),
                 user.email(),

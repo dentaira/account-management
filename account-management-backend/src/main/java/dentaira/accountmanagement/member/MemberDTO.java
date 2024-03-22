@@ -8,7 +8,7 @@ import java.time.Instant;
 public record MemberDTO(MemberId memberId, String companyName, String departmentName, MemberStatus status,
                         EmailAddress email, int version, Instant createdAt, Instant updatedAt) {
 
-    public static MemberDTO from(Member member) {
+    static MemberDTO from(Member member) {
         return new MemberDTO(member.memberId(),
                 member.companyName(),
                 member.departmentName(),
