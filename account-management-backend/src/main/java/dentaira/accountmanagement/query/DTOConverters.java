@@ -10,9 +10,15 @@ import org.jooq.Record;
 
 import static dentaira.accountmanagement.jooq.Tables.USERS;
 
+/**
+ * インフラ層のライブラリのコードからDTOへの変換処理を提供する
+ *
+ * <p>
+ * 複数のQueryで扱わないDTOの変換処理は、各Queryクラス内に記述すること
+ */
 public class DTOConverters {
 
-    public static UserDTO toUserDTO(Record r) {
+    static UserDTO toUserDTO(Record r) {
         return new UserDTO(
                 new UserId(r.get(USERS.USER_ID)),
                 new MemberId(r.get(USERS.MEMBER_ID)),

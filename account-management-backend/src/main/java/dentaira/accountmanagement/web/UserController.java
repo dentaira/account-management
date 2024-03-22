@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.web.user;
+package dentaira.accountmanagement.web;
 
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.user.UserCreateCommand;

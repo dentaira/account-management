@@ -1,6 +1,7 @@
 package dentaira.accountmanagement.query;
 
 import dentaira.accountmanagement.member.MemberId;
+import dentaira.accountmanagement.user.UserDTO;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ import static java.util.stream.Collectors.groupingBy;
 @Component
 @AllArgsConstructor
 public class MemberWithUsersQuery {
+
+    public record MemberWithUsersDTO(MemberId memberId, String companyName, List<UserDTO> users) {
+    }
 
     private final DSLContext context;
 

@@ -1,9 +1,8 @@
-package dentaira.accountmanagement.web.member;
+package dentaira.accountmanagement.web;
 
 import dentaira.accountmanagement.member.MemberCreateCommand;
 import dentaira.accountmanagement.member.MemberDTO;
 import dentaira.accountmanagement.member.MemberUsecase;
-import dentaira.accountmanagement.query.MemberWithUsersDTO;
 import dentaira.accountmanagement.query.MemberWithUsersQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class MemberController {
     private final MemberWithUsersQuery memberWithUsersQuery;
 
     @GetMapping
-    public List<MemberWithUsersDTO> get() {
+    public List<MemberWithUsersQuery.MemberWithUsersDTO> get() {
         return memberWithUsersQuery.fetch();
     }
 
@@ -27,5 +26,4 @@ public class MemberController {
     public MemberDTO post(@RequestBody MemberCreateCommand command) {
         return memberUsecase.create(command);
     }
-
 }
