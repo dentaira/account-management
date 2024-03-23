@@ -9,6 +9,7 @@ plugins {
 //    id("org.jooq.jooq-codegen-gradle") version "???" // Spring Bootのバージョンを3.3.0に上げたらこちらに切り替える
     id("org.openapi.generator") version "7.4.0"
     id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
+    id("com.github.spotbugs") version "6.0.9"
 }
 
 group = "dentaira"
@@ -149,4 +150,9 @@ tasks {
     forkedSpringBootRun {
         doNotTrackState("See https://github.com/springdoc/springdoc-openapi-gradle-plugin/issues/102")
     }
+}
+
+spotbugs {
+    excludeFilter = file("$rootDir/spotbugs/exclude.xml")
+    reportsDir = file("$buildDir/reports/spotbugs")
 }

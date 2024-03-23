@@ -1,0 +1,23 @@
+<FindBugsFilter>
+
+    <Match>
+        <Package name="dentaira.accountmanagement.jooq"/>
+        <!-- 抑制理由: 自動生成されるソースなので除外する -->
+    </Match>
+
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP"/>
+        <!-- 抑制理由:
+        RecordのフィールドにListを定義するとこの警告が出る。
+        有用な警告ではあるのだが、以下の対策で対応しても警告自体は消えないので抑制する。
+        コーディング規約やレビューで以下の対策を徹底する
+        ・データコンテナにはrecordを使用する
+        ・他のクラスのメソッド・コンストラクタに渡すコレクションはImmutableなコレクションを使用する
+        -->
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+        <!-- 抑制理由: EI_EXPOSE_REP と同じ -->
+    </Match>
+
+</FindBugsFilter>
