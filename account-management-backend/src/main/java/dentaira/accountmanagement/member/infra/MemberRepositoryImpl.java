@@ -1,6 +1,5 @@
 package dentaira.accountmanagement.member.infra;
 
-import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.common.EntityUpdateConflictException;
@@ -21,7 +20,7 @@ import static dentaira.accountmanagement.jooq.Tables.MEMBERS;
 @AllArgsConstructor
 public class MemberRepositoryImpl implements MemberRepository {
 
-    private static final TimeBasedEpochGenerator generator = Generators.timeBasedEpochGenerator();
+    private final TimeBasedEpochGenerator generator;
     private final DSLContext context;
 
     @Override

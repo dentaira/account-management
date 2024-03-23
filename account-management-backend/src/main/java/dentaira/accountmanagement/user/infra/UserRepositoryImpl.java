@@ -25,7 +25,7 @@ import static dentaira.accountmanagement.jooq.Tables.USERS;
 @AllArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
 
-    private static final TimeBasedEpochGenerator generator = Generators.timeBasedEpochGenerator();
+    private final TimeBasedEpochGenerator generator;
     private final DSLContext context;
 
     @Override
