@@ -1,3 +1,4 @@
+import net.ltgt.gradle.errorprone.errorprone
 import org.jooq.meta.jaxb.ForcedType
 
 plugins {
@@ -10,6 +11,7 @@ plugins {
     id("org.openapi.generator") version "7.4.0"
     id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
     id("com.github.spotbugs") version "6.0.9"
+    id("net.ltgt.errorprone") version "3.1.0"
 }
 
 group = "dentaira"
@@ -66,12 +68,18 @@ dependencies {
     jooqGenerator(project(":jooq-custom-generator"))
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
+
+    errorprone("com.google.errorprone:error_prone_core:2.26.1")
 }
 
 dependencyManagement {
     imports {
         mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
     }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.errorprone.disableWarningsInGeneratedCode.set(true)
 }
 
 tasks.withType<Test> {
