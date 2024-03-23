@@ -1,6 +1,8 @@
 package dentaira.accountmanagement.common;
 
-public record EmailAddress(String value) {
+import jakarta.validation.constraints.Email;
+
+public record EmailAddress(@Email String value) {
 
     public static EmailAddress of(String localPart, String domain) {
         return new EmailAddress(localPart + "@" + domain);

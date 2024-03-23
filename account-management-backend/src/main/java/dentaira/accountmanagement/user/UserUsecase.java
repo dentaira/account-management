@@ -22,8 +22,7 @@ public class UserUsecase {
      * fixme create password
      */
     public UserDTO create(UserCreateCommand command) {
-        var email = new EmailAddress(command.email());
-
+        var email = command.email();
         userRepository.findByEmail(email).ifPresent(user -> {
             throw new IllegalArgumentException("User already exists. " + email.value());
         });
@@ -38,7 +37,7 @@ public class UserUsecase {
 
     @EventListener
     public void onMemberCreated(MemberCreatedEvent event) {
-        var command = new UserCreateCommand(event.memberId(), event.email().value(), event.applicantName(), UserRole.Admin);
+        var command = new UserCreateCommand(event.memberId(), event.email(), event.applicantName(), UserRole.Admin);
         create(command);
     }
 
