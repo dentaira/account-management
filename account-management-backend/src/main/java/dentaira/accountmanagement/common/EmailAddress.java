@@ -2,8 +2,8 @@ package dentaira.accountmanagement.common;
 
 public record EmailAddress(String value) {
 
-    public static EmailAddress of(String local, String domain) {
-        return new EmailAddress(local + "@" + domain);
+    public static EmailAddress of(String localPart, String domain) {
+        return new EmailAddress(localPart + "@" + domain);
     }
 
 }
