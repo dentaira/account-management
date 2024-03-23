@@ -83,7 +83,7 @@ flyway {
     url = "jdbc:postgresql://localhost:5432/mydatabase"
     user = "myuser"
     password = "secret"
-    cleanDisabled = false
+    cleanDisabled = false // fixme 暫定
 }
 
 buildscript {
