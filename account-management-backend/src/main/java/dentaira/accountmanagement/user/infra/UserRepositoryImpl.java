@@ -1,6 +1,5 @@
 package dentaira.accountmanagement.user.infra;
 
-import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedEpochGenerator;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.common.EntityUpdateConflictException;
@@ -16,7 +15,6 @@ import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import static dentaira.accountmanagement.jooq.Tables.USERS;
 
@@ -36,13 +34,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(UserId userId) {
         var record = context.selectFrom(USERS).where(USERS.USER_ID.eq(userId.value())).fetchOptional();
-        return record.map(toUser);
+        return record.map(this::toUser);
     }
 
     @Override
     public Optional<User> findByEmail(EmailAddress email) {
         var record = context.selectFrom(USERS).where(USERS.EMAIL.eq(email.value())).fetchOptional();
-        return record.map(toUser);
+        return record.map(this::toUser);
     }
 
     @Override
@@ -72,19 +70,20 @@ public class UserRepositoryImpl implements UserRepository {
                 .and(USERS.VERSION.eq(user.version()))
                 .returning()
                 .fetchOptional()
-                .map(toUser).orElseThrow(EntityUpdateConflictException::new);
+                .map(this::toUser).orElseThrow(EntityUpdateConflictException::new);
     }
 
-    private final Function<UsersRecord, User> toUser = r -> new User(
-            new UserId(r.getUserId()),
-            new MemberId(r.getMemberId()),
-            new EmailAddress(r.getEmail()),
-            r.getUserName(),
-            UserRole.valueOf(r.getRole()),
-            UserStatus.valueOf(r.getStatus()),
-            r.getVersion(),
-            r.getCreatedAt(),
-            r.getUpdatedAt()
-    );
-
+    private User toUser(UsersRecord r) {
+        return new User(
+                new UserId(r.getUserId()),
+                new MemberId(r.getMemberId()),
+                new EmailAddress(r.getEmail()),
+                r.getUserName(),
+                UserRole.valueOf(r.getRole()),
+                UserStatus.valueOf(r.getStatus()),
+                r.getVersion(),
+                r.getCreatedAt(),
+                r.getUpdatedAt()
+        );
+    }
 }

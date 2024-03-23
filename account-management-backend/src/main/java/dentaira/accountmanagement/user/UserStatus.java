@@ -9,7 +9,7 @@ public enum UserStatus {
     Inactive("利用停止中"),
     Deleted("削除済み");
 
-    private final String displayName;
+    public final String displayName;
 
     public boolean canTransitTo(UserStatus newStatus) {
         if (this == newStatus) {

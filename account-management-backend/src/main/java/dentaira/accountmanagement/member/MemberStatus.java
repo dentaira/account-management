@@ -9,5 +9,5 @@ public enum MemberStatus {
     Recess("休会中"),
     Deleted("退会済み");
 
-    private final String displayName;
+    public final String displayName;
 }
