@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.web;
+package dentaira.accountmanagement.adapter.web;
 
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.user.*;

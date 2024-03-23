@@ -1,4 +1,4 @@
-package dentaira.accountmanagement.web;
+package dentaira.accountmanagement.adapter.web;
 
 import dentaira.accountmanagement.member.MemberCreateCommand;
 import dentaira.accountmanagement.member.MemberDTO;
