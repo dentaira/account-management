@@ -37,6 +37,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.flywaydb:flyway-core")
     implementation("org.springframework.modulith:spring-modulith-starter-core")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     implementation("com.fasterxml.uuid:java-uuid-generator:5.0.0")
 
