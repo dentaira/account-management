@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class MemberService {
 
-    private final DateTimeFactory dateTimeFactory;
+  private final DateTimeFactory dateTimeFactory;
 
-    public Member create(MemberId memberId, String companyName, String departmentName, EmailAddress email) {
-        var now = dateTimeFactory.now();
-        return new Member(memberId, companyName, departmentName, MemberStatus.Provisional, email, 1, now, now);
-    }
-
+  public Member create(
+      MemberId memberId, String companyName, String departmentName, EmailAddress email) {
+    var now = dateTimeFactory.now();
+    return new Member(
+        memberId, companyName, departmentName, MemberStatus.Provisional, email, 1, now, now);
+  }
 }

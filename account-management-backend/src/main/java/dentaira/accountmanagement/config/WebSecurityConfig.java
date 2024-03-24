@@ -9,14 +9,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // todo セキュリティはいったん無効化
-//        http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
-//                .httpBasic(withDefaults())
-        ;
-        return http.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
-    }
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    // todo セキュリティはいったん無効化
+    //        http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
+    //                .httpBasic(withDefaults())
+    ;
+    return http.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
+        .csrf(AbstractHttpConfigurer::disable)
+        .build();
+  }
 }

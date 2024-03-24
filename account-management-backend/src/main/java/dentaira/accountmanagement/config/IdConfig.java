@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class IdConfig {
 
-    @Bean
-    public TimeBasedEpochGenerator idGenerator() {
-        return Generators.timeBasedEpochGenerator();
-    }
-
+  @Bean
+  public TimeBasedEpochGenerator idGenerator() {
+    return Generators.timeBasedEpochGenerator();
+  }
 }

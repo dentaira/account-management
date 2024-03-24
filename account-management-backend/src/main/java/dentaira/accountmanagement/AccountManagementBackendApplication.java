@@ -5,13 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.modulith.Modulithic;
 
 @SpringBootApplication
-@Modulithic(
-        sharedModules = {"common"}
-)
+@Modulithic(sharedModules = {"common"})
 public class AccountManagementBackendApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AccountManagementBackendApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(AccountManagementBackendApplication.class, args);
+  }
 }

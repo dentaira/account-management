@@ -12,20 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class MemberUsecase {
 
-    private final MemberService memberService;
-    private final MemberRepository memberRepository;
-    private final ApplicationEventPublisher eventPublisher;
+  private final MemberService memberService;
+  private final MemberRepository memberRepository;
+  private final ApplicationEventPublisher eventPublisher;
 
-    @Transactional
-    public MemberDTO create(MemberCreateCommand command) {
-        var email = new EmailAddress(command.email());
-        var memberId = memberRepository.generateId();
-        var member = memberService.create(memberId, command.companyName(), command.departmentName(), email);
+  @Transactional
+  public MemberDTO create(MemberCreateCommand command) {
+    var email = new EmailAddress(command.email());
+    var memberId = memberRepository.generateId();
+    var member =
+        memberService.create(memberId, command.companyName(), command.departmentName(), email);
 
-        memberRepository.save(member);
+    memberRepository.save(member);
 
-        eventPublisher.publishEvent(new MemberCreatedEvent(member.memberId(), command.applicantName(), email));
+    eventPublisher.publishEvent(
+        new MemberCreatedEvent(member.memberId(), command.applicantName(), email));
 
-        return MemberDTO.from(member);
-    }
+    return MemberDTO.from(member);
+  }
 }

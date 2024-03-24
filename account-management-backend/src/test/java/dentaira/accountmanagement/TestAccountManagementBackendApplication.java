@@ -10,14 +10,15 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 public class TestAccountManagementBackendApplication {
 
-    @Bean
-    @ServiceConnection
-    PostgreSQLContainer<?> mysqlContainer() {
-        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-    }
+  @Bean
+  @ServiceConnection
+  PostgreSQLContainer<?> mysqlContainer() {
+    return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.from(AccountManagementBackendApplication::main).with(TestAccountManagementBackendApplication.class).run(args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.from(AccountManagementBackendApplication::main)
+        .with(TestAccountManagementBackendApplication.class)
+        .run(args);
+  }
 }

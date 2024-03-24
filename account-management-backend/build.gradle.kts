@@ -1,3 +1,4 @@
+import com.diffplug.gradle.spotless.SpotlessTask
 import net.ltgt.gradle.errorprone.errorprone
 import org.jooq.meta.jaxb.ForcedType
 
@@ -12,6 +13,7 @@ plugins {
     id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
     id("com.github.spotbugs") version "6.0.9"
     id("net.ltgt.errorprone") version "3.1.0"
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "dentaira"
@@ -163,4 +165,17 @@ tasks {
 spotbugs {
     excludeFilter = file("$rootDir/spotbugs/exclude.xml")
     reportsDir = file("$buildDir/reports/spotbugs")
+}
+
+spotless {
+    java {
+        target("**/*.java")
+        targetExclude("**/generated/**")
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat()
+    }
+}
+tasks.withType<SpotlessTask> {
+    dependsOn("generateJooq")
 }

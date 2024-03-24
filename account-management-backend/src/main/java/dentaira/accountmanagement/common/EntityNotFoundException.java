@@ -1,4 +1,3 @@
 package dentaira.accountmanagement.common;
 
-public class EntityNotFoundException extends RuntimeException {
-}
+public class EntityNotFoundException extends RuntimeException {}
