@@ -1,6 +1,5 @@
 package dentaira.accountmanagement.member;
 
-import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.member.domain.MemberRepository;
 import dentaira.accountmanagement.member.domain.MemberService;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ public class MemberUsecase {
 
   @Transactional
   public MemberDTO create(MemberCreateCommand command) {
-    var email = new EmailAddress(command.email());
+    var email = command.email();
     var memberId = memberRepository.generateId();
     var member =
         memberService.create(memberId, command.companyName(), command.departmentName(), email);

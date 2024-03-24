@@ -4,6 +4,7 @@ import dentaira.accountmanagement.member.MemberCreateCommand;
 import dentaira.accountmanagement.member.MemberDTO;
 import dentaira.accountmanagement.member.MemberUsecase;
 import dentaira.accountmanagement.query.MemberWithUsersQuery;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class MemberController {
   }
 
   @PostMapping
-  public MemberDTO post(@RequestBody MemberCreateCommand command) {
+  public MemberDTO post(@RequestBody @Valid MemberCreateCommand command) {
     return memberUsecase.create(command);
   }
 }
