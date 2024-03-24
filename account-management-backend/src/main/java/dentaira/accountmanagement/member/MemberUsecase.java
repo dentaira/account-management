@@ -26,7 +26,8 @@ public class MemberUsecase {
     memberRepository.save(member);
 
     eventPublisher.publishEvent(
-        new MemberCreatedEvent(member.memberId(), command.applicantName(), email));
+        new MemberCreatedEvent(
+            member.memberId(), command.applicantName(), email, command.passwordForFirstUser()));
 
     return MemberDTO.from(member);
   }

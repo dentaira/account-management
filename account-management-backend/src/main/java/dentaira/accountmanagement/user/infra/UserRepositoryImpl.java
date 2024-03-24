@@ -48,6 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
         .set(USERS.USER_ID, user.userId().value())
         .set(USERS.MEMBER_ID, user.memberId().value())
         .set(USERS.EMAIL, user.email().value())
+        .set(USERS.PASSWORD, user.password())
         .set(USERS.USER_NAME, user.name())
         .set(USERS.ROLE, user.role().name())
         .set(USERS.STATUS, user.status().name())
@@ -62,6 +63,7 @@ public class UserRepositoryImpl implements UserRepository {
     return context
         .update(USERS)
         .set(USERS.EMAIL, user.email().value())
+        .set(USERS.PASSWORD, user.password())
         .set(USERS.USER_NAME, user.name())
         .set(USERS.ROLE, user.role().name())
         .set(USERS.STATUS, user.status().name())
@@ -79,6 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
         new UserId(r.getUserId()),
         new MemberId(r.getMemberId()),
         new EmailAddress(r.getEmail()),
+        r.getPassword(),
         r.getUserName(),
         UserRole.valueOf(r.getRole()),
         UserStatus.valueOf(r.getStatus()),

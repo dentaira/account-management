@@ -26,6 +26,7 @@ CREATE TABLE users (
       user_id UUID NOT NULL
     , member_id UUID NOT NULL
     , email character varying(256) NOT NULL
+    , password text NOT NULL
     , user_name character varying(64) NOT NULL
     , role character varying(32) NOT NULL
     , status character varying(32) NOT NULL
@@ -42,6 +43,7 @@ COMMENT ON TABLE users IS 'ユーザー';
 COMMENT ON COLUMN users.user_id IS 'ID';
 COMMENT ON COLUMN users.member_id IS '会員ID';
 COMMENT ON COLUMN users.email IS 'メールアドレス';
+COMMENT ON COLUMN users.password IS 'パスワード';
 COMMENT ON COLUMN users.user_name IS 'ユーザー名';
 COMMENT ON COLUMN users.role IS 'ロール';
 COMMENT ON COLUMN users.status IS 'ステータス';

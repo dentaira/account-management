@@ -14,6 +14,7 @@ public record User(
     UserId userId,
     MemberId memberId,
     EmailAddress email,
+    String password,
     String name,
     UserRole role,
     UserStatus status,

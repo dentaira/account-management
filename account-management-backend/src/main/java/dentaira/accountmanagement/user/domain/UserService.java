@@ -16,9 +16,15 @@ public class UserService {
   private final DateTimeFactory dateTimeFactory;
 
   public User create(
-      UserId userId, MemberId memberId, EmailAddress email, String name, UserRole role) {
+      UserId userId,
+      MemberId memberId,
+      EmailAddress email,
+      String encryptedPassword,
+      String name,
+      UserRole role) {
     var now = dateTimeFactory.now();
-    return new User(userId, memberId, email, name, role, UserStatus.Active, 1, now, now);
+    return new User(
+        userId, memberId, email, encryptedPassword, name, role, UserStatus.Active, 1, now, now);
   }
 
   public User edit(User user, String name, UserRole role, boolean activate) {

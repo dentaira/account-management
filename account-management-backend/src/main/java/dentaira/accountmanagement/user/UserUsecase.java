@@ -7,6 +7,7 @@ import dentaira.accountmanagement.user.domain.UserRepository;
 import dentaira.accountmanagement.user.domain.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,15 +18,34 @@ public class UserUsecase {
 
   private final UserService userService;
   private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-  /** fixme create password */
   public UserDTO create(UserCreateCommand command) {
+    var rawPassword = "password"; // fixme 仮パスワード
+    return doCreate(command, rawPassword);
+  }
+
+  @EventListener
+  public void onMemberCreated(MemberCreatedEvent event) {
+    var command =
+        new UserCreateCommand(
+            event.memberId(), event.email(), event.applicantName(), UserRole.Admin);
+    doCreate(command, event.rawPasswordForFirstUser());
+  }
+
+  private UserDTO doCreate(UserCreateCommand command, String rawPassword) {
     requireNotRegisteredEmail(command.email());
 
     var userId = userRepository.generateId();
+    var encryptedPassword = passwordEncoder.encode(rawPassword);
     var createdUser =
         userService.create(
-            userId, command.memberId(), command.email(), command.name(), command.role());
+            userId,
+            command.memberId(),
+            command.email(),
+            encryptedPassword,
+            command.name(),
+            command.role());
 
     userRepository.save(createdUser);
 
@@ -39,14 +59,6 @@ public class UserUsecase {
             user -> {
               throw new IllegalArgumentException("User already exists. " + email.value());
             });
-  }
-
-  @EventListener
-  public void onMemberCreated(MemberCreatedEvent event) {
-    var command =
-        new UserCreateCommand(
-            event.memberId(), event.email(), event.applicantName(), UserRole.Admin);
-    create(command);
   }
 
   /** fixme 実際の値が変更されていなくても更新日時とバージョンが更新される */
