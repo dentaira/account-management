@@ -83,6 +83,7 @@ dependencyManagement {
 
 tasks.withType<JavaCompile>().configureEach {
     options.errorprone.disableWarningsInGeneratedCode.set(true)
+    options.errorprone.disable("UnicodeInCode") // テストメソッドは日本語も使うため
 }
 
 tasks.withType<Test> {
