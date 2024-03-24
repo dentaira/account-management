@@ -20,21 +20,25 @@ public class UserUsecase {
 
   /** fixme create password */
   public UserDTO create(UserCreateCommand command) {
-    var email = command.email();
+    requireNotRegisteredEmail(command.email());
+
+    var userId = userRepository.generateId();
+    var createdUser =
+        userService.create(
+            userId, command.memberId(), command.email(), command.name(), command.role());
+
+    userRepository.save(createdUser);
+
+    return UserDTO.from(createdUser);
+  }
+
+  private void requireNotRegisteredEmail(EmailAddress email) {
     userRepository
         .findByEmail(email)
         .ifPresent(
             user -> {
               throw new IllegalArgumentException("User already exists. " + email.value());
             });
-
-    var userId = userRepository.generateId();
-    var createdUser =
-        userService.create(userId, command.memberId(), email, command.name(), command.role());
-
-    userRepository.save(createdUser);
-
-    return UserDTO.from(createdUser);
   }
 
   @EventListener
