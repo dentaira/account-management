@@ -12,7 +12,7 @@ public class TestAccountManagementBackendApplication {
 
   @Bean
   @ServiceConnection
-  PostgreSQLContainer<?> mysqlContainer() {
+  PostgreSQLContainer<?> postgresqlContainer() {
     return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
   }
 
