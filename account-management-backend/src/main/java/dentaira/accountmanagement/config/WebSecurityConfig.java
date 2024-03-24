@@ -14,7 +14,6 @@ public class WebSecurityConfig {
     // todo セキュリティはいったん無効化
     //        http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
     //                .httpBasic(withDefaults())
-    ;
     return http.authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
         .csrf(AbstractHttpConfigurer::disable)
         .build();

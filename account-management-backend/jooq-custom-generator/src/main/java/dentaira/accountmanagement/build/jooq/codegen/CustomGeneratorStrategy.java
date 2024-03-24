@@ -11,6 +11,7 @@ import org.jooq.meta.Definition;
  * @see <a
  *     href="https://github.com/etiennestuder/gradle-jooq-plugin/tree/main/example/configure_custom_generator_strategy">参考にしたサンプル</a>
  */
+@SuppressWarnings("unused") // build.gradle で使用しているため
 public class CustomGeneratorStrategy extends DefaultGeneratorStrategy {
 
   /**
