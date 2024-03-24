@@ -14,6 +14,7 @@ plugins {
     id("com.github.spotbugs") version "6.0.9"
     id("net.ltgt.errorprone") version "3.1.0"
     id("com.diffplug.spotless") version "6.25.0"
+    jacoco
 }
 
 group = "dentaira"
@@ -147,7 +148,7 @@ jooq {
 
 openApi {
     apiDocsUrl.set("http://localhost:8080/api-docs.yaml")
-    outputDir.set(file("$buildDir/docs"))
+    outputDir.set(file(layout.buildDirectory.dir("api-docs")))
     outputFileName.set("swagger.yaml")
     waitTimeInSeconds.set(10)
     customBootRun {
@@ -164,7 +165,7 @@ tasks {
 
 spotbugs {
     excludeFilter = file("$rootDir/spotbugs/exclude.xml")
-    reportsDir = file("$buildDir/reports/spotbugs")
+    reportsDir = file(layout.buildDirectory.dir("reports/spotbugs"))
 }
 
 spotless {
@@ -178,4 +179,9 @@ spotless {
 }
 tasks.withType<SpotlessTask> {
     dependsOn("generateJooq")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = file(layout.buildDirectory.dir("reports/jacoco"))
 }
