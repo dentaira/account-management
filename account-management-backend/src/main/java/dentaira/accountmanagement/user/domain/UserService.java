@@ -3,6 +3,7 @@ package dentaira.accountmanagement.user.domain;
 import dentaira.accountmanagement.common.DateTimeFactory;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.member.MemberId;
+import dentaira.accountmanagement.user.UnregisteredUserEmailAddress;
 import dentaira.accountmanagement.user.UserId;
 import dentaira.accountmanagement.user.UserRole;
 import dentaira.accountmanagement.user.UserStatus;
@@ -18,13 +19,22 @@ public class UserService {
   public User create(
       UserId userId,
       MemberId memberId,
-      EmailAddress email,
+      UnregisteredUserEmailAddress email,
       String encryptedPassword,
       String name,
       UserRole role) {
     var now = dateTimeFactory.now();
     return new User(
-        userId, memberId, email, encryptedPassword, name, role, UserStatus.Active, 1, now, now);
+        userId,
+        memberId,
+        email.email(),
+        encryptedPassword,
+        name,
+        role,
+        UserStatus.Active,
+        1,
+        now,
+        now);
   }
 
   public User edit(User user, String name, UserRole role, boolean activate) {

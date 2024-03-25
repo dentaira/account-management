@@ -34,7 +34,7 @@ public class UserUsecase {
   }
 
   private UserDTO doCreate(UserCreateCommand command, String rawPassword) {
-    requireNotRegisteredEmail(command.email());
+    var unregisteredEmail = validateUnregisteredEmail(command.email());
 
     var userId = userRepository.generateId();
     var encryptedPassword = passwordEncoder.encode(rawPassword);
@@ -42,7 +42,7 @@ public class UserUsecase {
         userService.create(
             userId,
             command.memberId(),
-            command.email(),
+            unregisteredEmail,
             encryptedPassword,
             command.name(),
             command.role());
@@ -52,13 +52,12 @@ public class UserUsecase {
     return UserDTO.from(createdUser);
   }
 
-  private void requireNotRegisteredEmail(EmailAddress email) {
-    userRepository
-        .findByEmail(email)
-        .ifPresent(
-            user -> {
-              throw new IllegalArgumentException("User already exists. " + email.value());
-            });
+  public UnregisteredUserEmailAddress validateUnregisteredEmail(EmailAddress email) {
+    if (userRepository.findByEmail(email).isPresent()) {
+      throw new IllegalArgumentException("User already exists. " + email.value());
+    } else {
+      return new UnregisteredUserEmailAddress(email);
+    }
   }
 
   /** fixme 実際の値が変更されていなくても更新日時とバージョンが更新される */
