@@ -8,9 +8,9 @@ import dentaira.accountmanagement.user.UserDTO;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @AllArgsConstructor
 public class MemberWithUsersQuery {
 
