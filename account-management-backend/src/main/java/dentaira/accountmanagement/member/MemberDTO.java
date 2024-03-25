@@ -3,11 +3,12 @@ package dentaira.accountmanagement.member;
 import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.member.domain.Member;
 import java.time.Instant;
+import java.util.Optional;
 
 public record MemberDTO(
     MemberId memberId,
     String companyName,
-    String departmentName,
+    Optional<String> departmentName,
     MemberStatus status,
     EmailAddress email,
     int version,

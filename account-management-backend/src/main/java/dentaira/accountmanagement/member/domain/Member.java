@@ -4,6 +4,7 @@ import dentaira.accountmanagement.common.EmailAddress;
 import dentaira.accountmanagement.member.MemberId;
 import dentaira.accountmanagement.member.MemberStatus;
 import java.time.Instant;
+import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.Builder;
 
@@ -11,7 +12,7 @@ import lombok.Builder;
 public record Member(
     MemberId memberId,
     String companyName,
-    String departmentName,
+    Optional<String> departmentName,
     MemberStatus status,
     EmailAddress email,
     int version,

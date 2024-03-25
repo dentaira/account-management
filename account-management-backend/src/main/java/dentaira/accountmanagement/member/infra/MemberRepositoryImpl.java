@@ -40,7 +40,7 @@ public class MemberRepositoryImpl implements MemberRepository {
         .insertInto(MEMBERS)
         .set(MEMBERS.MEMBER_ID, member.memberId().value())
         .set(MEMBERS.COMPANY_NAME, member.companyName())
-        .set(MEMBERS.DEPARTMENT_NAME, member.departmentName())
+        .set(MEMBERS.DEPARTMENT_NAME, member.departmentName().orElse(null))
         .set(MEMBERS.STATUS, member.status().name())
         .set(MEMBERS.EMAIL, member.email().value())
         .set(MEMBERS.VERSION, member.version())
@@ -54,7 +54,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     return context
         .update(MEMBERS)
         .set(MEMBERS.COMPANY_NAME, member.companyName())
-        .set(MEMBERS.DEPARTMENT_NAME, member.departmentName())
+        .set(MEMBERS.DEPARTMENT_NAME, member.departmentName().orElse(null))
         .set(MEMBERS.STATUS, member.status().name())
         .set(MEMBERS.EMAIL, member.email().value())
         .set(MEMBERS.VERSION, member.version() + 1)
@@ -72,7 +72,7 @@ public class MemberRepositoryImpl implements MemberRepository {
     return new Member(
         new MemberId(record.getMemberId()),
         record.getCompanyName(),
-        record.getDepartmentName(),
+        Optional.ofNullable(record.getDepartmentName()),
         MemberStatus.valueOf(record.getStatus()),
         new EmailAddress(record.getEmail()),
         record.getVersion(),
