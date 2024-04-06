@@ -1,12 +1,13 @@
 package dentaira.accountmanagement.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 
-public record UserId(UUID value) {
+public record UserId(@JsonValue UUID value) {
 
-  public static UserId of(UUID value) {
-    return new UserId(value);
-  }
+  @JsonCreator
+  public UserId {}
 
   public static UserId of(String value) {
     return new UserId(UUID.fromString(value));
