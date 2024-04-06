@@ -183,6 +183,6 @@ tasks.withType<SpotlessTask> {
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.12"
     reportsDirectory = file(layout.buildDirectory.dir("reports/jacoco"))
 }
